@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraped Movies</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scraped Movies</h1>
+    <form action="/scrape" method="POST">
+        <button type="submit">Start Web Scrape</button>
+    </form>
+
+    {% if movies %}
+        <h2>Movie Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Categories</th>
+                    <th>Region</th>
+                    <th>Duration</th>
+                    <th>Release Date</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                    <tr>
+                        <td><img src="{{ movie.image_url }}" alt="{{ movie.title }}"></td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.categories }}</td>
+                        <td>{{ movie.region }}</td>
+                        <td>{{ movie.duration }}</td>
+                        <td>{{ movie.release_date }}</td>
+                        <td>{{ movie.rating }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No data to display</p>
+    {% endif %}
+</body>
+</html>
